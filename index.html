@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Digital Clock with Date</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Digital clock start -->
+    <div class="datetime">
+        <div class="date">
+            <span id="dayname">Day</span>,
+            <span id="month">Month</span>
+            <span id="day">00</span>,
+            <span id="year">Year</span>
+        </div>
+        <div class="time">
+            <span id="hour">00</span>:
+            <span id="minutes">00</span>:
+            <span id="seconds">00</span>
+            <span id="period">AM</span>
+        </div>
+    </div>
+    <!-- Digital Clock end -->
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            const day = now.getDay();
+            const month = now.getMonth();
+            const date = now.getDate();
+            const year = now.getFullYear();
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const period = hours >= 12 ? "PM" : "AM";
+
+            // Convert to 12-hour format
+            hours = hours % 12 || 12;
+
+            document.getElementById("dayname").textContent = dayNames[day];
+            document.getElementById("month").textContent = monthNames[month];
+            document.getElementById("day").textContent = date;
+            document.getElementById("year").textContent = year;
+            document.getElementById("hour").textContent = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+            document.getElementById("period").textContent = period;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial update to avoid delay
+        updateClock();
+    </script>
+</body>
+</html>
